@@ -11,7 +11,7 @@ All routes are same-origin under `/api`. Error responses use `{detail: string}` 
 - `POST /api/sessions/{id}/preview` body `{message}` returns a full session, using a clearly labeled deterministic path.
 - `POST /api/sessions/{id}/confirm/{action_id}` with no body returns `{case, session}`. Show pending action summary and priority before this human button. After success, `sendContextualUpdate` may report actual case ID to the live agent.
 - `POST /api/sessions/{id}/messages` body `{role,text}` appends final SDK messages, returns `{ok:true}`.
-- `POST /api/sessions/{id}/provider` body `{conversation_id}` records the SDK conversation ID, returns `{ok:true}`.
+- `POST /api/sessions/{id}/provider` body `{conversation_id}` acknowledges SDK onConnect, binds the ID and starts the usage clock, returns `{ok:true}`. Capability issuance leaves the session connecting.
 - `POST /api/sessions/{id}/end` returns a full session. End the SDK conversation first.
 - `GET /api/sessions/{id}/provider-report` returns sanitized provider usage or a clear unavailable state; optional read permission may be absent.
 
